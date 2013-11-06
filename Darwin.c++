@@ -1,13 +1,14 @@
 #include "Darwin.h"
+#include <iterator>
 
 Species::Species() {
-	species = '.';
-	instructions(0);
+	species_name = '.';
+	instructions.resize(0);
 }
 
 Species::Species(char s) {
-	species = s;
-	instructions(0);
+	species_name = s;
+	instructions.resize(0);
 }
 
 void Species::add_instruction(string inst) {
@@ -25,6 +26,10 @@ Creature::Creature(Species s, int d) {
 	pc = 0;
 }
 
+/*Creature& Creature::operator=(const Creature &lhs, const Creature &rhs) {
+	lhs = rhs;
+}*/
+
 World::World(int r, int c) {
 	rows = r;
 	cols = c;
@@ -32,13 +37,20 @@ World::World(int r, int c) {
 }
 
 void World::print_world() {
-	vector< vector<Creature*> >::iterator it=grid.begin(), end=grid.end();
-	while(it != end) {
-		vector<Creature*>::iterator it1=it->begin(), end1=it->end();
-		copy(it1, end1, ostream_iterator<Creature*>(cout, " "));
+	for(int i = 0; i < rows; ++i) {
+		for(int j = 0; j < cols; ++j) {
+			if(grid[i][j] == NULL)
+				cout << ". ";
+			else
+				cout << grid[i][j] << " ";
+		}
 		cout << endl;
-		++it;
 	}
+	cout << endl;
+}
+
+void World::place_at(Creature creature, int r, int c) {
+	grid[r][c]->species = creature.species;
 }
 
 void World::simulate(int num_turns) {
@@ -47,6 +59,22 @@ void World::simulate(int num_turns) {
 		print_world();
 		// TODO: actual darwin logic
 
+
 		++turn;
 	}
+}
+
+int main() {
+	World grid(10, 10);
+	grid.print_world();
+
+	Species f('f');
+    f.add_instruction("left");
+    f.add_instruction("go 0");
+    Creature food1(f, 2);
+    cout << food1.species.species << endl;
+    grid.place_at(food1, 0, 0);
+    grid.print_world();
+
+	return 0;
 }

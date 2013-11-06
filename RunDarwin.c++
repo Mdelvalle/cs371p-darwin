@@ -129,11 +129,17 @@ int main () {
         */
         World world(8, 8);
         Creature food1(f, 2);
+        world.place_at(food1, 0, 0);
         Creature hopper1(h, 1);
+        world.place_at(hopper1, 3, 3);
         Creature hopper2(h, 2);
+        world.place_at(hopper2, 3, 4);
         Creature hopper3(h, 3);
+        world.place_at(hopper3, 4, 4);
         Creature hopper4(h, 0);
+        world.place_at(hopper4, 4, 3);
         Creature food2(f, 1);
+        world.place_at(food2, 7, 7);
         world.simulate(5);
         }
     catch (const invalid_argument&) {
