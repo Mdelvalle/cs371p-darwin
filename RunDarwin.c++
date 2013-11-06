@@ -41,24 +41,31 @@ int main () {
     // ----
     // food
     // ----
+    Species f('f');
 
     /*
      0: left
      1: go 0
     */
+     f.add_instruction("left");
+     f.add_instruction("go 0");
 
     // ------
     // hopper
     // ------
+     Species h('h');
 
     /*
      0: hop
      1: go 0
     */
+     h.add_instruction("hop");
+     h.add_instruction("go 0");
 
     // -----
     // rover
     // -----
+     Species r('r');
 
     /*
      0: if_enemy 9
@@ -73,10 +80,22 @@ int main () {
      9: infect
     10: go 0
     */
+     r.add_instruction("if_enemy 9");
+     r.add_instruction("if_empty 7");
+     r.add_instruction("if_random 5");
+     r.add_instruction("left");
+     r.add_instruction("go 0");
+     r.add_instruction("right");
+     r.add_instruction("go 0");
+     r.add_instruction("hop");
+     r.add_instruction("go 0");
+     r.add_instruction("infect");
+     r.add_instruction("go 0");
 
     // ----
     // trap
     // ----
+     Species t('t');
 
     /*
      0: if_enemy 3
@@ -85,6 +104,11 @@ int main () {
      3: infect
      4: go 0
     */
+     t.add_instruction("if_enemy 3");
+     t.add_instruction("left");
+     t.add_instruction("go 0");
+     t.add_instruction("infect");
+     t.add_instruction("go 0");
 
     // ----------
     // darwin 8x8
@@ -103,6 +127,14 @@ int main () {
         Simulate 5 moves.
         Print every grid.
         */
+        World world(8, 8);
+        Creature food1(f, 2);
+        Creature hopper1(h, 1);
+        Creature hopper2(h, 2);
+        Creature hopper3(h, 3);
+        Creature hopper4(h, 0);
+        Creature food2(f, 1);
+        world.simulate(5);
         }
     catch (const invalid_argument&) {
         assert(false);}
@@ -125,6 +157,8 @@ int main () {
         Simulate 5 moves.
         Print every grid.
         */
+        World world(7, 9);
+        Creature trap1()
         }
     catch (const invalid_argument&) {
         assert(false);}

@@ -7,95 +7,40 @@
 
 using namespace std;
 
-/************
-****World****
-*************/
+class Species {
+	private:
+		vector<string> instructions;		// instruction list
+		char species;
+
+	public:
+		Species();							// No default species; put '.' instead
+		Species(char s);					// Initialize species char
+		void add_instruction(string inst);	// push_back instruction to instruction vector
+};
+
+class Creature {
+	private:
+		Species species;
+		int pc;								// program counter
+		int direction;						// W: 0, N: 1, E: 2, S: 3
+
+	public:
+		Creature();							// No default species; put '.' instead
+		Creature(Species s, int d);			// give creature a species and a direction
+};
+
 class World {
 private:
-	vector< vector< Creature* > > grid;
-	int cols;
+	vector<vector<Creature*> > grid;		// world grid vector of creature pointers
 	int rows;
+	int cols;
+	int turn;								// # of times darwin(each creature) will run
 
 public:
-	World(int c, int r);
-	void printWorld();
+	World(int r, int c);
+	void print_world();
+	void simulate(int num_turns);
 };
 
-/***********
-**Creature**
-************/
-template<typename T>
-class Creature {
-private:
-	T species;
-	int row;
-	int col;
-	int prog_counter;
-	char direction;
-public:
-	Creature(T sp, char dir, int r, int c);
-	void initSpecies();
-};
-
-/**************
-**Instruction**
-**************/
-template<typename T>
-class Instruction {
-private:
-	T sp;
-	vector<String> instructions;
-
-public:
-	Instruction(T species);
-};
-
-/*********
-***Food***
-*********/
-class Food {
-private:
-	String name;
-	Instruction inst;
-
-public:
-	Food();
-};
-
-/***********
-***Hopper***
-***********/
-class Hopper {
-private:
-	String name;
-	Instruction inst;
-
-public:
-	Hopper();
-};
-
-/**********
-***Rover***
-**********/
-class Rover {
-private:
-	String name;
-	Instruction inst;
-
-public:
-	Rover();
-};
-
-/*********
-***Trap***
-*********/
-class Trap {
-private:
-	String name;
-	Instruction inst;
-
-public:
-	Trap();
-};
 
 #endif
