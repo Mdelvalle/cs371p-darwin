@@ -18,12 +18,14 @@ void Species::add_instruction(string inst) {
 Creature::Creature() {
 	pc = 0;
 	direction = 0;
+  action = false;
 }
 
 Creature::Creature(Species s, int d) {
 	species = s;
 	direction = d;
 	pc = 0;
+  action = false;
 }
 
 World::World(int r, int c) {
@@ -45,13 +47,139 @@ void World::print_world() {
 	cout << endl;
 }
 
-void World::place_at(Creature creature, int r, int c) {
+static void World::place_at(Creature creature, int r, int c) {
 	grid[r][c] = &creature;
 }
 
-void World::simulate(vector<string> inst) {
-	int i = 0;
-	if(strcmp(inst[i], "left"))
+void World::simulate(Creature creature, int r, int c) {
+  // Actions
+  if(!creature->action) {
+	  if(strcmp(creature->species.instructions[creature->pc], "hop") == 0) {
+      int d = creature->direction;
+       if(d == 0 && c > 0 && grid[r][c - 1] == NULL) {
+         place_at(creature, r, c - 1);
+         creature->pc += 1;
+         //creature->action = true;
+         return;
+       }
+       else if(d == 1 && r > 0 && grid[r - 1][c] == NULL) {
+         place_at(creature, r - 1, c);
+         creature->pc += 1;
+         //creature->action = true;
+         return;
+       }
+       else if(d == 2 && c < (cols-1) && grid[r][c + 1] == NULL) {
+         place_at(creature, r, c + 1);
+         creature->pc += 1;
+         //creature->action = true;
+         return;
+       }
+       else if(d == 3 && r < (rows-1) && grid[r + 1][c] == NULL) {
+         place_at(creature, r + 1, c);
+         creature->pc += 1;
+         //creature->action = true;
+         return;
+       }
+    }
+    else if(strcmp(creature->species.instructions[creature->pc], "left") == 0) {
+       if(creature->direction == 0) {
+        creature->direction = 3;
+        creature->pc += 1;
+        //creature->action = true;
+        return;
+      }
+      else if(creature->direction == 1) {
+        creature->direction = 0;
+        creature->pc += 1;
+        //creature->action = true;
+        return;
+      }
+      else if(creature->direction == 2) {
+        creature->direction = 1;
+        creature->pc += 1;
+        //creature->action = true;
+        return;
+      }
+      else if(creature->direction == 3) {
+        creature->direction = 2;
+        creature->pc += 1;
+        //creature->action = true;
+        return;
+      }
+   }
+   else if(strcmp(creature->species.instructions[creature->pc], "right") == 0) {
+      if(creature->direction == 0) {
+        creature->direction = 1;
+        creature->pc += 1;
+        //creature->action = true;
+        return;
+      }
+      else if(creature->direction == 1) {
+        creature->direction = 2;
+        creature->pc += 1;
+        //creature->action = true;
+        return;
+      }
+      else if(creature->direction == 2) {
+        creature->direction = 3;
+        creature->pc += 1;
+        //creature->action = true;
+        return;
+      }
+      else if(creature->direction == 3) {
+        creature->direction = 0;
+        creature->pc += 1;
+        //creature->action = true;
+        return;
+      }
+   }
+   else if(strcmp(creature->species.instructions[creature->pc], "infect") == 0) {
+        if((creature->direction == 0) && (c > 0) &&
+                                     (grid[r][c - 1]->species.species_name !=
+                                     creature.species.species_name)) {
+        grid[r][c - 1]->species = creature->species
+        grid[r][c - 1]->pc = 0;
+        return;
+       }
+       else if((creature->direction == 1) && (r > 0) &&
+                                     (grid[r][c - 1]->species.species_name !=
+                                     creature.species.species_name)) {
+        grid[r - 1][c]->species = creature->species
+        grid[r - 1][c]->pc = 0;
+        return;
+       }
+       else if((creature->direction == 2) && (c < (cols - 1)) &&
+                                     (grid[r][c - 1]->species.species_name !=
+                                     creature.species.species_name)) {
+        grid[r][c + 1]->species = creature->species
+        grid[r][c + 1]->pc = 0;
+        return;
+       }
+       else if((creature->direction == 3) && (r < (rows - 1)) &&
+                                     (grid[r][c - 1]->species.species_name !=
+                                     creature.species.species_name)) {
+        grid[r + 1][c]->species = creature->species
+        grid[r + 1][c]->pc = 0;
+        return;
+       }
+   }
+ }
+  // Control Flow
+	if(creature->species.instructions[creature->pc].compare("if_empty")) {
+
+  }
+	else if(creature->species.instructions[creature->pc].compare("if_wall")) {
+
+  }
+	else if(creature->species.instructions[creature->pc].compare("if_random")) {
+
+  }
+	else if(creature->species.instructions[creature->pc].compare("if_enemy")) {
+
+  }
+	else if(creature->species.instructions[creature->pc].compare("go")) {
+
+  }
 }
 
 void World::darwin(int num_turns) {
@@ -62,9 +190,8 @@ void World::darwin(int num_turns) {
 			for(int j = 0; j < cols; ++j) {
 				if(grid[i][j] == NULL)
 					continue;
-				else {
-					simulate(grid[i][j]->species.instructions);
-				}
+				else
+					simulate(grid[i][j], i, j);
 			}
 		}
 
