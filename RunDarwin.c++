@@ -140,7 +140,7 @@ int main () {
         world.place_at(hopper4, 4, 3);
         Creature food2(f, 1);
         world.place_at(food2, 7, 7);
-        world.simulate(5);
+        world.darwin(5);
         }
     catch (const invalid_argument&) {
         assert(false);}
@@ -164,7 +164,15 @@ int main () {
         Print every grid.
         */
         World world(7, 9);
-        Creature trap1()
+        Creature trap1(t, 3);
+        world.place_at(trap1, 0, 0);
+        Creature hopper1(h, 2);
+        world.place_at(hopper1, 3, 2);
+        Creature rover1(h, 1);
+        world.place_at(rover1, 5, 4);
+        Creature trap2(t, 0);
+        world.place_at(trap2, 6, 8);
+        world.darwin(5);
         }
     catch (const invalid_argument&) {
         assert(false);}
