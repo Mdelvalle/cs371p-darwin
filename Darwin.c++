@@ -2,6 +2,7 @@
 #include <iterator>
 #include <string>
 #include "string.h"
+#include <cstdlib>
 
 Species::Species() {
 	species_name = '.';
@@ -20,9 +21,6 @@ void Species::add_instruction(string inst) {
 	instructions.push_back(inst);
 }
 
-string Species::operator [] (int i) {
-    return instructions [i];
-}
 
 /*void Species::got_infected() {
 
@@ -35,39 +33,33 @@ void Species::print_name() {
 Creature::Creature() {
 	pc = 0;
 	direction = 0;
-  action = false;
 }
 
 Creature::Creature(Species s, int d) {
 	species = s;
 	direction = d;
 	pc = 0;
-  action = false;
 }
 
-void Creature::left() {
+/*void Creature::left() {
     if(direction == 0) {
         direction = 3;
         pc += 1;
-        action = true;
         return;
     }
     else if(direction == 1) {
         direction = 0;
         pc += 1;
-        action = true;
         return;
     }
     else if(direction == 2) {
         direction = 1;
         pc += 1;
-        action = true;
         return;
     }
     else if(direction == 3) {
         direction = 2;
         pc += 1;
-        action = true;
         return;
     }
 }
@@ -76,28 +68,24 @@ void Creature::right() {
     if(direction == 0) {
         direction = 1;
         pc += 1;
-        action = true;
         return;
     }
     else if(direction == 1) {
         direction = 2;
         pc += 1;
-        action = true;
         return;
     }
     else if(direction == 2) {
         direction = 3;
         pc += 1;
-        action = true;
         return;
     }
     else if(direction == 3) {
         direction = 0;
         pc += 1;
-        action = true;
         return;
     }
-}
+}*/
 
 /*
 void Creature::infect() {
@@ -151,7 +139,7 @@ void Creature::print_creature() {
 World::World(int r, int c) {
 	rows = r;
 	cols = c;
-	grid.resize(c, vector<Creature*>(r, NULL));
+	grid.resize(r, vector<Creature*>(c, NULL));
 }
 
 /*bool World::hop(Creature& creature) {
@@ -233,7 +221,6 @@ void World::simulate(Creature& creature, int r, int c) {
          place_at(creature, r - 1, c);
          ++(creature.pc);
          grid[r][c] = NULL;
-         creature.action = true;
          return;
        }
        else if((dir == 2) && (c < (cols-1)) && (grid[r][c + 1] == NULL)) {
@@ -295,7 +282,6 @@ void World::simulate(Creature& creature, int r, int c) {
       }
    }
    else if(strcmp(ins.c_str(), "infect") == 0) {
-    cout << "in infect " << endl;
         if((dir == 0) && (c > 0) &&
                                      (grid[r][c - 1]->species.species_name !=
                                       creature.species.species_name)) {
@@ -325,76 +311,61 @@ void World::simulate(Creature& creature, int r, int c) {
         return;
        }
    }
+
   // Control Flow
-	/*if(strcmp((ins.c_str().substr(0, 8)).c_str(), "if_empty")) {
-    // if(!wall() && !enemy())
-    int d = dir;
-    if(d == 0 && c > 0 && (grid[r][c - 1] == NULL)) {
+	if(strcmp((ins.substr(0, 8)).c_str(), "if_empty") == 0) {
+    if((dir == 0) && (c > 0) && (grid[r][c - 1] == NULL)) {
         // change 9 to a string.length() - 1
-        prog_c = stoi(creature.species.instructions[prog_c].substr(9, 1));
-        simulate(creature, r, c);
-    }
-    else if(d == 1 && r > 0 && (grid[r - 1][c] == NULL)) {
-        prog_c = stoi(creature.species.instructions[prog_c].substr(9, 1));
-        simulate(creature, r, c);
-    }
-    else if(d == 2 && c < (cols-1) && (grid[r][c + 1] == NULL)) {
-        prog_c = stoi(creature.species.instructions[prog_c].substr(9, 1));
-        simulate(creature, r, c);
-    }
-    else if(d == 3 && r < (rows-1) && (grid[r + 1][c] == NULL)) {
-        prog_c = stoi(creature.species.instructions[prog_c].substr(9, 1));
-        simulate(creature, r, c);
-    }
-    else
-        prog_c += 1;
-  }
-	else if(strcmp((creature.species.instructions[prog_c].substr(0, 7)).c_str(), "if_wall")) {
-    // if(wall())
-    int d = dir;
-    if((d == 0) && (c == 0)) {
-         prog_c = stoi(creature.species.instructions[prog_c].substr(8, 1));
+         creature.pc = stoi(ins.substr(9, 1));
          simulate(creature, r, c);
     }
-    else if((d == 1) && (r == 0)) {
-         prog_c = stoi(creature.species.instructions[prog_c].substr(8, 1));
+    else if((dir == 1) && (r > 0) && (grid[r - 1][c] == NULL)) {
+         creature.pc = stoi(ins.substr(9, 1));
          simulate(creature, r, c);
     }
-    else if((d == 2) && (c == (cols-1))) {
-         prog_c = stoi(creature.species.instructions[prog_c].substr(8, 1));
+    else if((dir == 2) && (c < (cols-1)) && (grid[r][c + 1] == NULL)) {
+         creature.pc = stoi(ins.substr(9, 1));
          simulate(creature, r, c);
     }
-    else if((d == 3) && (r == (rows-1))) {
-         prog_c = stoi(creature.species.instructions[prog_c].substr(8, 1));
+    else if((dir == 3) && (r < (rows-1)) && (grid[r + 1][c] == NULL)) {
+         creature.pc = stoi(ins.substr(9, 1));
          simulate(creature, r, c);
     }
     else
-        prog_c += 1;
+      ++(creature.pc);
   }
-	else if(strcmp((creature.species.instructions[prog_c].substr(0, 9)).c_str(), "if_random")) {
-    int d = dir;
-    if(d == 0 && c > 0 && (grid[r][c - 1] == NULL)) {
-         place_at(creature, r, c - 1);
-         prog_c += 1;
+	else if(strcmp((ins.substr(0, 7)).c_str(), "if_wall") == 0) {
+    if((dir == 0) && (c == 0)) {
+         creature.pc = stoi(ins.substr(8, 1));
+         simulate(creature, r, c);
+    }
+    else if((dir == 1) && (r == 0)) {
+         creature.pc = stoi(ins.substr(8, 1));
+         simulate(creature, r, c);
+    }
+    else if((dir == 2) && (c == (cols-1))) {
+         creature.pc = stoi(ins.substr(8, 1));
+         simulate(creature, r, c);
+    }
+    else if((dir == 3) && (r == (rows-1))) {
+         creature.pc = stoi(ins.substr(8, 1));
+         simulate(creature, r, c);
+    }
+    else
+        ++(creature.pc);
+  }
+	else if(strcmp((ins.substr(0, 9)).c_str(), "if_random") == 0) {
+    int r = rand();
+    if((r % 2) == 1) {
+         creature.pc = stoi(ins.substr(10, 1));
          simulate(creature, r, c);
        }
-       else if(d == 1 && r > 0 && (grid[r - 1][c] == NULL)) {
-         place_at(creature, r - 1, c);
-         prog_c += 1;
+    else {
+         ++(creature.pc);
          simulate(creature, r, c);
-       }
-       else if(d == 2 && c < (cols-1) && (grid[r][c + 1] == NULL)) {
-         place_at(creature, r, c + 1);
-         prog_c += 1;
-         simulate(creature, r, c);
-       }
-       else if(d == 3 && r < (rows-1) && (grid[r + 1][c] == NULL)) {
-         place_at(creature, r + 1, c);
-         prog_c += 1;
-         simulate(creature, r, c);
-       }
-  }*/
-	else if(strcmp(ins.c_str(), "if_enemy")) {
+    }
+  }
+	else if(strcmp((ins.substr(0, 8)).c_str(), "if_enemy") == 0) {
     if((dir == 0) && (c > 0) && (grid[r][c - 1] != NULL)&&(grid[r][c - 1]->species.species_name != creature.species.species_name)) {
          creature.pc = stoi(ins.substr(9, 1));
          simulate(creature, r, c);
@@ -416,7 +387,7 @@ void World::simulate(Creature& creature, int r, int c) {
   }
 
 
-	if(strcmp((ins.substr(0, 2)).c_str(), "go") == 0) {
+	else if(strcmp((ins.substr(0, 2)).c_str(), "go") == 0) {
      creature.pc = stoi((ins.substr(3, 1)));
      simulate(creature, r, c);
   }
@@ -436,13 +407,12 @@ void World::darwin(int num_turns) {
         cout << endl;
 			}
 		}
-
 		++turn;
 	}
 }
 
 int main() {
-    World world(8, 8);
+    World world(7, 9);
 
     Species f('f');
     f.add_instruction("left");
@@ -453,7 +423,7 @@ int main() {
     h.add_instruction("go 0");
 
     Species r('r');
-    r.add_instruction("if_enemy 9");
+    r.add_instruction("if_enemy 7");
     r.add_instruction("if_empty 7");
     r.add_instruction("if_random 5");
     r.add_instruction("left");
@@ -466,13 +436,27 @@ int main() {
     r.add_instruction("go 0");
 
     Species t('t');
-    t.add_instruction("if_enemy 2");
-    //t.add_instruction("left");
+    t.add_instruction("if_enemy 3");
+    t.add_instruction("left");
     t.add_instruction("go 0");
     t.add_instruction("infect");
     t.add_instruction("go 0");
 
-        Creature food1(f, 2);
+        Creature trap1(t, 3);
+        world.place_at(trap1, 0, 0);
+
+        Creature hopper1(h, 2);
+        world.place_at(hopper1, 3, 2);
+
+        Creature rover1(r, 1);
+        world.place_at(rover1, 5, 4);
+
+        Creature trap2(t, 0);
+        world.place_at(trap2, 6, 8);
+
+        world.darwin(5);
+
+/*        Creature food1(f, 2);
         world.place_at(food1, 0, 0);
 
         Creature hopper1(h, 1);
@@ -490,7 +474,9 @@ int main() {
         world.place_at(food2, 7, 7);
 
         Creature trap1(t, 2);
-        world.place_at(trap1, 0, 2);
+        world.place_at(trap1, 0, 2);*/
+
+
 
         world.darwin(5);
 

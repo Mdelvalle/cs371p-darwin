@@ -15,7 +15,6 @@ class Species {
 		Species();							// No default species; put '.' instead
 		Species(char s);					// Initialize species char
 		void add_instruction(string inst);	// push_back instruction to instruction vector
-		string operator [] (int i);
     //void got_infected();
     //probably need operator = and !=
     //void print_name();
@@ -27,11 +26,10 @@ class Creature {
 		Species species;
 		int pc;								// program counter
 		int direction;						// W: 0, N: 1, E: 2, S: 3
-    	bool action;              // true if action completes(will prob rem)
 		Creature();							// No default species; put '.' instead
 		Creature(Species s, int d);			// give creature a species and a direction
-		void left();
-		void right();
+		//void left();
+		//void right();
     //void left()
     //void right()
     //void print_creature();    //calls print_name()
@@ -52,7 +50,7 @@ public:
     bool empty();
     bool wall();*/
     //bool random();
-    bool enemy();
+    //bool enemy();
 	void print_world();
 	void place_at(Creature& creature, int r, int c);
 	void simulate(/*vector<string> inst*/Creature& creature, int r, int c);
