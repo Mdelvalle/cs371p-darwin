@@ -1,0 +1,140 @@
+\hypertarget{classWorld}{\section{\-World \-Class \-Reference}
+\label{classWorld}\index{\-World@{\-World}}
+}
+
+
+{\ttfamily \#include $<$\-Darwin.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classWorld_a0a6508ab2deaf638d0bf287b4d15cdfb}{\-World} (int r, int c)
+\item 
+void \hyperlink{classWorld_aec5199d8bcd9cb193215b8ed23f1f08f}{print\-\_\-world} ()
+\item 
+void \hyperlink{classWorld_ab856bfd692b0b641ec765e422682d1ed}{place\-\_\-at} (\hyperlink{classCreature}{\-Creature} \&creature, int r, int c)
+\item 
+void \hyperlink{classWorld_a4e86e3f9e593b29bf76d760b8081535c}{simulate} (\hyperlink{classCreature}{\-Creature} \&creature, int r, int c)
+\item 
+void \hyperlink{classWorld_aafac24ada3eb2f0f4e15cf8df58289b1}{darwin} (int num\-\_\-turns)
+\item 
+void \hyperlink{classWorld_ae5e51168c1f8fcf7eaac52bf01dd3f9d}{darwin} (int num\-\_\-turns, int first, int every)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classWorld_a8a8a12572e50b5e937df9d46693f935e}{vector$<$ vector$<$ \hyperlink{classCreature}{\-Creature} $\ast$ $>$ $>$ {\bfseries grid}}\label{classWorld_a8a8a12572e50b5e937df9d46693f935e}
+
+\item 
+\hypertarget{classWorld_a73ae6e66cee12735cb6d378545b7df5a}{vector$<$ vector$<$ bool $>$ $>$ {\bfseries c\-\_\-vec}}\label{classWorld_a73ae6e66cee12735cb6d378545b7df5a}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\hyperlink{classWorld}{\-World} \-Class \hyperlink{classWorld}{\-World} \-Class \-Holds the board 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classWorld_a0a6508ab2deaf638d0bf287b4d15cdfb}{\index{\-World@{\-World}!\-World@{\-World}}
+\index{\-World@{\-World}!World@{\-World}}
+\subsubsection[{\-World}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-World\-::\-World} (
+\begin{DoxyParamCaption}
+\item[{int}]{r, }
+\item[{int}]{c}
+\end{DoxyParamCaption}
+)}}\label{classWorld_a0a6508ab2deaf638d0bf287b4d15cdfb}
+\hyperlink{classWorld}{\-World} class 
+\begin{DoxyParams}{\-Parameters}
+{\em r} & is the \# of rows in the grid \\
+\hline
+{\em c} & is the \# of columns in the grid \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classWorld_aafac24ada3eb2f0f4e15cf8df58289b1}{\index{\-World@{\-World}!darwin@{darwin}}
+\index{darwin@{darwin}!World@{\-World}}
+\subsubsection[{darwin}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-World\-::darwin} (
+\begin{DoxyParamCaption}
+\item[{int}]{num\-\_\-turns}
+\end{DoxyParamCaption}
+)}}\label{classWorld_aafac24ada3eb2f0f4e15cf8df58289b1}
+
+\begin{DoxyParams}{\-Parameters}
+{\em num\-\_\-turns} & executes that many turns \-Calls simulate the make moves \\
+\hline
+\end{DoxyParams}
+\hypertarget{classWorld_ae5e51168c1f8fcf7eaac52bf01dd3f9d}{\index{\-World@{\-World}!darwin@{darwin}}
+\index{darwin@{darwin}!World@{\-World}}
+\subsubsection[{darwin}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-World\-::darwin} (
+\begin{DoxyParamCaption}
+\item[{int}]{num\-\_\-turns, }
+\item[{int}]{first = {\ttfamily 0}, }
+\item[{int}]{every = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{classWorld_ae5e51168c1f8fcf7eaac52bf01dd3f9d}
+
+\begin{DoxyParams}{\-Parameters}
+{\em number} & of turns to execute \\
+\hline
+{\em first} & iteration of printed boards \\
+\hline
+{\em every} & after printed boards \\
+\hline
+\end{DoxyParams}
+\hypertarget{classWorld_ab856bfd692b0b641ec765e422682d1ed}{\index{\-World@{\-World}!place\-\_\-at@{place\-\_\-at}}
+\index{place\-\_\-at@{place\-\_\-at}!World@{\-World}}
+\subsubsection[{place\-\_\-at}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-World\-::place\-\_\-at} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Creature} \&}]{creature, }
+\item[{int}]{r, }
+\item[{int}]{c}
+\end{DoxyParamCaption}
+)}}\label{classWorld_ab856bfd692b0b641ec765e422682d1ed}
+
+\begin{DoxyParams}{\-Parameters}
+{\em creature} & \\
+\hline
+{\em r} & row index \\
+\hline
+{\em c} & col index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+places the creature in appropiate location in the grid 
+\end{DoxyReturn}
+\hypertarget{classWorld_aec5199d8bcd9cb193215b8ed23f1f08f}{\index{\-World@{\-World}!print\-\_\-world@{print\-\_\-world}}
+\index{print\-\_\-world@{print\-\_\-world}!World@{\-World}}
+\subsubsection[{print\-\_\-world}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-World\-::print\-\_\-world} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classWorld_aec5199d8bcd9cb193215b8ed23f1f08f}
+print out the current state of the board \hypertarget{classWorld_a4e86e3f9e593b29bf76d760b8081535c}{\index{\-World@{\-World}!simulate@{simulate}}
+\index{simulate@{simulate}!World@{\-World}}
+\subsubsection[{simulate}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-World\-::simulate} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Creature} \&}]{creature, }
+\item[{int}]{r, }
+\item[{int}]{c}
+\end{DoxyParamCaption}
+)}}\label{classWorld_a4e86e3f9e593b29bf76d760b8081535c}
+
+\begin{DoxyParams}{\-Parameters}
+{\em creature} & \\
+\hline
+{\em r} & row index \\
+\hline
+{\em c} & col index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+executes the next instruction of the creature untl it finds an action move 
+\end{DoxyReturn}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\-Darwin.\-h\item 
+\-Darwin.\-c++\end{DoxyCompactItemize}

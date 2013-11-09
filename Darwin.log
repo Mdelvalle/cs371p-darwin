@@ -1,0 +1,59 @@
+commit 05e722492562b02cf8b14b62f1d173cc4bb17db8
+Author: miguel del valle <delvalle@cs.utexas.edu>
+Date:   Thu Nov 7 22:06:45 2013 -0600
+
+    working mostly
+
+commit 0b0c9aba4068352476b3088830b8ad9ac59ca9ae
+Author: miguel del valle <delvalle@cs.utexas.edu>
+Date:   Thu Nov 7 20:37:41 2013 -0600
+
+    need enemy
+
+commit 43f89d4ea9a1d3c61d68a87284d88215048a878e
+Author: miguel del valle <delvalle@cs.utexas.edu>
+Date:   Wed Nov 6 23:33:30 2013 -0600
+
+    worked some more on the logic
+
+commit c61c6a02731399bb95fa27d18d55c89f7f247552
+Author: miguel del valle <delvalle@cs.utexas.edu>
+Date:   Wed Nov 6 15:48:42 2013 -0600
+
+    working on logic
+
+commit 4d45795905affbfb42443e8ee886bc2f5239c047
+Author: miguel del valle <delvalle@cs.utexas.edu>
+Date:   Wed Nov 6 12:10:55 2013 -0600
+
+    prints dots, but seg faults when trying to add creature
+
+commit e72aae366a9460154ea1d095a1a3f4d91715818a
+Author: miguel del valle <delvalle@cs.utexas.edu>
+Date:   Tue Nov 5 22:00:13 2013 -0600
+
+    rewrote Darwin.h and Darwin.c++
+
+commit f73e8ef892afa070ff39aa02f644d475ea6e2e96
+Author: miguel del valle <delvalle@cs.utexas.edu>
+Date:   Sun Nov 3 17:31:50 2013 -0600
+
+    Got constructors set up and stuff
+
+commit ef2b602bb1c2aa0284047f1391994ee270dcfca6
+Author: miguel del valle <delvalle@cs.utexas.edu>
+Date:   Sun Nov 3 15:38:41 2013 -0600
+
+    Print grid/world
+
+commit a8d46318559b0aaac46f04e9f0193796b7754bd8
+Author: miguel del valle <delvalle@cs.utexas.edu>
+Date:   Sun Nov 3 14:01:34 2013 -0600
+
+    Initial commit
+
+commit 24b97e0cef16594d7ddaf0909a91830a0d176f64
+Author: Miguel Del Valle <Mdelvalle@live.com>
+Date:   Sun Nov 3 11:52:43 2013 -0800
+
+    Initial commit

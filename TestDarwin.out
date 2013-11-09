@@ -1,0 +1,52 @@
+Running main() from gtest_main.cc
+[==========] Running 20 tests from 2 test cases.
+[----------] Global test environment set-up.
+[----------] 12 tests from World
+[ RUN      ] World.place_at1
+[       OK ] World.place_at1 (72 ms)
+[ RUN      ] World.place_at2
+[       OK ] World.place_at2 (3 ms)
+[ RUN      ] World.place_at3
+[       OK ] World.place_at3 (3 ms)
+[ RUN      ] World.place_at4
+[       OK ] World.place_at4 (3 ms)
+[ RUN      ] World.place_at5
+[       OK ] World.place_at5 (4 ms)
+[ RUN      ] World.simulate1
+[       OK ] World.simulate1 (21 ms)
+[ RUN      ] World.simulate2
+[       OK ] World.simulate2 (4 ms)
+[ RUN      ] World.simulate3
+[       OK ] World.simulate3 (4 ms)
+[ RUN      ] World.simulate4
+[       OK ] World.simulate4 (5 ms)
+[ RUN      ] World.darwin1
+[       OK ] World.darwin1 (3 ms)
+[ RUN      ] World.darwin2
+[       OK ] World.darwin2 (3 ms)
+[ RUN      ] World.darwin3
+[       OK ] World.darwin3 (3 ms)
+[----------] 12 tests from World (138 ms total)
+
+[----------] 8 tests from Species
+[ RUN      ] Species.add_instruction1
+[       OK ] Species.add_instruction1 (4 ms)
+[ RUN      ] Species.add_instruction2
+[       OK ] Species.add_instruction2 (3 ms)
+[ RUN      ] Species.add_instruction3
+[       OK ] Species.add_instruction3 (3 ms)
+[ RUN      ] Species.add_instruction4
+[       OK ] Species.add_instruction4 (3 ms)
+[ RUN      ] Species.add_instruction5
+[       OK ] Species.add_instruction5 (4 ms)
+[ RUN      ] Species.add_instruction6
+[       OK ] Species.add_instruction6 (5 ms)
+[ RUN      ] Species.add_instruction7
+[       OK ] Species.add_instruction7 (4 ms)
+[ RUN      ] Species.add_instruction8
+[       OK ] Species.add_instruction8 (4 ms)
+[----------] 8 tests from Species (31 ms total)
+
+[----------] Global test environment tear-down
+[==========] 20 tests from 2 test cases ran. (197 ms total)
+[  PASSED  ] 20 tests.
